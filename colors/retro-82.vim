@@ -1,7 +1,8 @@
-"     ┏┏┓ o ┳━┓ ┓━┓ ┏┏┓ ┳━┓
-"     ┃┃┃ ┃ ┃━┫ ┗━┓ ┃┃┃ ┃━┫
-"     ┛ ┇ ┇ ┛ ┇ ━━┛ ┛ ┇ ┛ ┇
-" a fog descends upon your editor
+"    ┏━┓┏━╸╺┳╸┏━┓┏━┓   ╻┏━┓┏━┓
+"    ┣┳┛┣╸  ┃ ┣┳┛┃ ┃    ┣━┫┏━┛
+"    ╹┗╸┗━╸ ╹ ╹┗╸┗━┛    ┗━┛┗━╸
+"   Soak in the retro coastline
+" syntax and structure based on miasma.nvim by xero: https://github.com/xero/miasma.nvim
 " https://github.com/oldjobobo/retro-82.nvim
 
 set background=dark

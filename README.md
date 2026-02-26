@@ -1,31 +1,26 @@
-# retro-82.nvim ☁️
+# Retro 82 (`retro-82.nvim`)
 
-a color scheme for `{neo,}vim` inspired by the woods, built using [lush](https://github.com/rktjmp/lush.nvim) 👄
+Retro 82 is a high-contrast Neovim colorscheme with a neon-coastline vibe: deep navy backgrounds, sea-glass cyans, and warm sunset accents.
 
-supports treesitter, gitsigns, lazy, which-key, telescope, lsp diagnostics, and more.
+It includes highlight groups for modern Neovim workflows, including Treesitter, LSP diagnostics, Telescope, Gitsigns, Lazy, WhichKey, and more.
 
-![theme preview](https://raw.githubusercontent.com/oldjobobo/retro-82.nvim/main/preview.png)
+```text
+┏━┓┏━╸╺┳╸┏━┓┏━┓   ╻┏━┓┏━┓
+┣┳┛┣╸  ┃ ┣┳┛┃ ┃    ┣━┫┏━┛
+╹┗╸┗━╸ ╹ ╹┗╸┗━┛    ┗━┛┗━╸
 ```
-┏┏┓o┳━┓┓━┓┏┏┓┳━┓
-┃┃┃┃┃━┫┗━┓┃┃┃┃━┫
-┛ ┇┇┛ ┇━━┛┛ ┇┛ ┇
-```
-a fog descends upon your editor
-https://github.com/oldjobobo/retro-82.nvim
 
-## flavors
+Repo: https://github.com/oldjobobo/retro-82.nvim
 
-this theme is available in a classic vim compatible format, optimized lua, and a development lua version. you can install different flavors by using the corresponding branches:
+## Naming
 
-* [main](https://github.com/oldjobobo/retro-82.nvim/tree/main) - classic vim version
-* lua - optimized lua version (coming soon)
-* [dev](https://github.com/oldjobobo/retro-82.nvim/tree/dev) - development lua version
+- Product name: `Retro 82`
+- Plugin/repo slug: `retro-82.nvim`
+- Colorscheme ID: `retro-82`
 
-for speed and greatest compatibility, use the main branch.
+## Installation
 
-## installation
-
-using `lazy`
+### lazy.nvim
 
 ```lua
 {
@@ -38,47 +33,50 @@ using `lazy`
 }
 ```
 
-using `plug`
+### vim-plug
 
 ```vim
 Plug 'oldjobobo/retro-82.nvim'
 colorscheme retro-82
 ```
 
-using `packer`
+### packer.nvim
 
 ```lua
-use {"oldjobobo/retro-82.nvim"}
+use { "oldjobobo/retro-82.nvim" }
 vim.cmd("colorscheme retro-82")
 ```
 
-## usage
+## Usage
 
-set the color scheme with the builtin command `:colorscheme`
+Set the theme with:
 
-## customization
+```vim
+:colorscheme retro-82
+```
 
-this theme is built with `lush.nvim`, so customizations are quite easy.
+## Extras
 
-first, checkout the [dev](https://github.com/oldjobobo/retro-82.nvim/tree/dev) branch `git fetch origin dev && git checkout dev`, open the lua theme `nvim lua/lush_theme/retro-82.lua` and execute `:Lushify`. then adjust colors to suit your taste with real-time feedback. checkout [the dev branch readme](https://github.com/oldjobobo/retro-82.nvim/blob/dev/README.md) for details on building the optimized colorscheme. lots more details on using `lush` in [their repo](https://github.com/rktjmp/lush.nvim).
+Additional app ports are in `extras/`:
 
-## extras
+- `retro-82.Xresources` (Xresources/X11 terminals)
+- `retro-82.itermcolors` (iTerm2)
+- `retro-82.fish` (fish shell)
+- `retro-82.zsh` (zsh)
+- `retro-82.yml` (Alacritty YAML)
+- `retro-82.toml` (Alacritty TOML)
+- `retro-82.colorscheme` (QTerminal)
+- `retro-82.ghostty` (Ghostty)
 
-this theme has been ported to a few different apps, and are included in the `extras` directory:
+## Credits
 
-* `retro-82.Xresources` - colors for [xclients](https://wiki.archlinux.org/title/x_resources) (e.g. unix terminal emulators)
-* `retro-82.itermcolors` - colors for [iterm2](https://iterm2.com)
-* `retro-82.fish` - colors for [fish](https://fishshell.com/)
-* `retro-82.zsh` - colors for [zsh](https://zsh.org)
-* `retro-82.yml` - colors for [alacritty](https://alacritty.org) (yml format)
-* `retro-82.toml` - colors for [alacritty](https://alacritty.org) (toml format)
-* `retro-82.colorscheme` - colors for [qterminal](https://github.com/lxqt/qterminal)
-* `retro-82.ghostty` - colors for [ghostty](https://ghostty.org/)
+The Neovim plugin structure and baseline theme implementation are based on [miasma.nvim](https://github.com/xero/miasma.nvim) by [xero](https://x-e.ro).
 
-more on the way, and pr's for others are welcomed!
+The Retro 82 color palette and color decisions are by OldJobobo.
 
-# license
+
+## License
 
 ![kopimi logo](https://gist.githubusercontent.com/xero/cbcd5c38b695004c848b73e5c1c0c779/raw/6b32899b0af238b17383d7a878a69a076139e72d/kopimi-sm.png)
 
-all files and scripts in this repo are released [CC0](https://creativecommons.org/publicdomain/zero/1.0/) / [kopimi](https://kopimi.com)! in the spirit of _freedom of information_, i encourage you to fork, modify, change, share, or do whatever you like with this project! `^c^v`
+All files and scripts in this repo are released under [CC0](https://creativecommons.org/publicdomain/zero/1.0/) / [kopimi](https://kopimi.com).

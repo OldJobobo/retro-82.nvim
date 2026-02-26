@@ -1,9 +1,9 @@
-! ┏┏┓o┳━┓┓━┓┏┏┓┳━┓
-! ┃┃┃┃┃━┫┗━┓┃┃┃┃━┫
-! ┛ ┇┇┛ ┇━━┛┛ ┇┛ ┇
-! miasma by xero (https://x-e.ro)
+!┏━┓┏━╸╺┳╸┏━┓┏━┓   ╻┏━┓┏━┓
+!┣┳┛┣╸  ┃ ┣┳┛┃ ┃    ┣━┫┏━┛
+!╹┗╸┗━╸ ╹ ╹┗╸┗━┛    ┗━┛┗━╸
+! Retro 82 by OldJobobo
 ! add this to your ~/.Xresources or import this
-! by adding: #include "path/to/miasma.xresources"
+! by adding: #include "path/to/retro-82.Xresources"
 
 *.foreground:   #FFF1DA
 *.background:   #00172E

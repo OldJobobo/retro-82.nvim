@@ -1,4 +1,4 @@
-# colors (miasma) https://github.com/xero/miasma.nvim
+# Retro 82 colors (based on miasma.nvim by xero: https://github.com/xero/miasma.nvim)
 [colors]
 indexed_colors = [{ index = 16, color = "0x222222"}]
 

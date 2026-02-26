@@ -1,7 +1,7 @@
-# ┏┏┓o┳━┓┓━┓┏┏┓┳━┓
-# ┃┃┃┃┃━┫┗━┓┃┃┃┃━┫
-# ┛ ┇┇┛ ┇━━┛┛ ┇┛ ┇
-#  miasma by xero (https://x-e.ro)
+#┏━┓┏━╸╺┳╸┏━┓┏━┓   ╻┏━┓┏━┓
+#┣┳┛┣╸  ┃ ┣┳┛┃ ┃    ┣━┫┏━┛
+#╹┗╸┗━╸ ╹ ╹┗╸┗━┛    ┗━┛┗━╸
+# Retro 82 (based on miasma by xero: https://x-e.ro)
 
 if [ "$TERM" = "linux" ]
 then

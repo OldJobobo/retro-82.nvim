@@ -1,0 +1,35 @@
+background            #00172E
+foreground            #FFF1DA
+
+# black
+color0  #000000
+color8  #5F8F96
+
+# red
+color1  #E97B3C
+color9  #E97B3C
+
+# green
+color2  #028391
+color10 #028391
+
+# yellow
+color3  #F85525
+color11 #F85525
+
+# blue
+color4  #3F8F8A
+color12 #3F8F8A
+
+# magenta
+color5  #E97B3C
+color13 #E97B3C
+
+#cyan
+color6  #FAA968
+color14 #FAA968
+
+#white
+color7  #F6DCAC
+color15 #F6DCAC
+

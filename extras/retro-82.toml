@@ -1,0 +1,30 @@
+# colors (miasma) https://github.com/xero/miasma.nvim
+[colors]
+indexed_colors = [{ index = 16, color = "0x222222"}]
+
+# Primary colors
+[colors.primary]
+background = "#00172E"
+foreground = "#FFF1DA"
+
+# Normal colors
+[colors.normal]
+black = "#00172E"
+red = "#E97B3C"
+green = "#028391"
+yellow = "#F85525"
+blue = "#3F8F8A"
+magenta = "#E97B3C"
+cyan = "#FAA968"
+white = "#F6DCAC"
+
+# Bright colors
+[colors.bright]
+black = "#5F8F96"
+red = "#E97B3C"
+green = "#028391"
+yellow = "#F85525"
+blue = "#3F8F8A"
+magenta = "#E97B3C"
+cyan = "#FAA968"
+white = "#F6DCAC"

@@ -423,7 +423,7 @@ hi User6 guifg=#F6DCAC guibg=#FAA968 guisp=NONE blend=NONE gui=NONE
 hi User7 guifg=#F6DCAC guibg=#3F8F8A guisp=NONE blend=NONE gui=NONE
 hi User8 guifg=#F6DCAC guibg=#F85525 guisp=NONE blend=NONE gui=NONE
 hi User9 guifg=#F6DCAC guibg=#5F8F96 guisp=NONE blend=NONE gui=NONE
-hi VertSplit guifg=#01204E guibg=#00172E guisp=NONE blend=NONE gui=NONE
+hi VertSplit guifg=#134E5A guibg=#00172E guisp=NONE blend=NONE gui=NONE
 hi Visual guifg=#FFF1DA guibg=#134E5A guisp=NONE blend=NONE gui=NONE
 hi WarningMsg guifg=#F85525 guibg=NONE guisp=NONE blend=NONE gui=NONE
 hi WhichKeyBorder guifg=NONE guibg=#01204E guisp=NONE blend=NONE gui=NONE

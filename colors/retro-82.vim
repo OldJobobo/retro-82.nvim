@@ -121,7 +121,7 @@ hi LazyUrl guifg=NONE guibg=NONE guisp=NONE blend=NONE gui=NONE
 hi LazyValue guifg=NONE guibg=NONE guisp=NONE blend=NONE gui=NONE
 hi lCursor guifg=bg guibg=fg guisp=NONE blend=NONE gui=NONE
 hi lessVariable guifg=#F85525 guibg=NONE guisp=NONE blend=NONE gui=NONE
-hi LineNr guifg=#5F8F96 guibg=#01204E guisp=NONE blend=NONE gui=NONE
+hi LineNr guifg=#5F8F96 guibg=#00172E guisp=NONE blend=NONE gui=NONE
 hi! link @boolean Boolean
 hi! link Character Constant
 hi! link @comment Comment

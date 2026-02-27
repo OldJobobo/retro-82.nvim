@@ -317,7 +317,7 @@ hi Number guifg=#3F8F8A guibg=NONE guisp=NONE blend=NONE gui=NONE
 hi NvimInternalError guifg=#0A3A45 guibg=#F85525 guisp=NONE blend=NONE gui=NONE
 hi phpIdentifier guifg=#F85525 guibg=NONE guisp=NONE blend=NONE gui=NONE
 hi phpSpecialFunction guifg=#E97B3C guibg=NONE guisp=NONE blend=NONE gui=NONE
-hi Pmenu guifg=#F6DCAC guibg=#0A3A45 guisp=NONE blend=NONE gui=NONE
+hi Pmenu guifg=#F6DCAC guibg=#5F8F96 guisp=NONE blend=NONE gui=NONE
 hi PmenuSbar guifg=NONE guibg=#5F8F96 guisp=NONE blend=NONE gui=NONE
 hi PmenuSel guifg=#FAA968 guibg=#3F8F8A guisp=NONE blend=NONE gui=NONE
 hi PmenuThumb guifg=#F6DCAC guibg=#F6DCAC guisp=NONE blend=NONE gui=NONE

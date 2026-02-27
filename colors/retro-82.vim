@@ -21,8 +21,8 @@ hi Comment guifg=#5F8F96 guibg=NONE guisp=NONE blend=NONE gui=NONE
 hi Constant guifg=#E97B3C guibg=NONE guisp=NONE blend=NONE gui=NONE
 hi CursorColumn guifg=NONE guibg=#01204E guisp=NONE blend=NONE gui=NONE
 hi Cursor guifg=#00172E guibg=#E97B3C guisp=NONE blend=NONE gui=NONE
-hi CursorLine guifg=NONE guibg=#01204E guisp=NONE blend=NONE gui=NONE
-hi CursorLineNr guifg=#3F8F8A guibg=#01204E guisp=NONE blend=NONE gui=bold
+hi CursorLine guifg=NONE guibg=#0A3A45 guisp=NONE blend=NONE gui=NONE
+hi CursorLineNr guifg=#E97B3C guibg=#0A3A45 guisp=NONE blend=NONE gui=bold
 hi Delimiter guifg=#F6DCAC guibg=NONE guisp=NONE blend=NONE gui=NONE
 hi DiagnosticDeprecated guifg=NONE guibg=NONE guisp=#E97B3C blend=NONE gui=strikethrough
 hi DiagnosticError guifg=#F85525 guibg=NONE guisp=NONE blend=NONE gui=NONE

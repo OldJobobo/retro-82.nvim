@@ -54,7 +54,7 @@ hi DiffChange guifg=#00172E guibg=#E97B3C guisp=NONE blend=NONE gui=NONE
 hi DiffDelete guifg=#00172E guibg=#F85525 guisp=NONE blend=NONE gui=bold
 hi DiffRemoved guifg=#F85525 guibg=#0A3A45 guisp=NONE blend=NONE gui=NONE
 hi DiffText guifg=#00172E guibg=#FAA968 guisp=NONE blend=NONE gui=bold
-hi Directory guifg=#3F8F8A guibg=#0A3A45 guisp=NONE blend=NONE gui=NONE
+hi Directory guifg=#3F8F8A guibg=#00172E guisp=NONE blend=NONE gui=NONE
 hi Error guifg=#FFF1DA guibg=#E97B3C guisp=NONE blend=NONE gui=NONE
 hi ErrorMsg guifg=#F85525 guibg=#00172E guisp=NONE blend=NONE gui=NONE
 hi FloatShadow guifg=NONE guibg=#00172E guisp=NONE blend=NONE gui=NONE

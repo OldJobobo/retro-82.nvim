@@ -12,6 +12,8 @@ It includes highlight groups for modern Neovim workflows, including Treesitter, 
 
 Repo: https://github.com/oldjobobo/retro-82.nvim
 
+Current version: `0.2.0`
+
 ## Naming
 
 - Product name: `Retro 82`
@@ -53,6 +55,20 @@ Set the theme with:
 
 ```vim
 :colorscheme retro-82
+```
+
+## Versioning
+
+`retro-82.nvim` uses Semantic Versioning.
+
+- `MAJOR`: breaking visual or structural changes
+- `MINOR`: new highlight coverage, integrations, and non-breaking theme improvements
+- `PATCH`: fixes, small polish updates, and regressions
+
+Release tags should use a `v` prefix, for example:
+
+```text
+v0.2.0
 ```
 
 ## Extras

@@ -21,12 +21,17 @@ M.text = M.fg0
 M.text_bright = M.fg1
 M.text_muted = M.muted
 M.comment = M.muted
+M.number = M.teal
 M.constant = M.orange
 M.string = M.orange
 M.keyword = M.cyan
+M.preproc = M.orange
 M.type = M.teal
 M.func = M.teal
+M.module = M.teal
 M.identifier = M.fg0
+M.parameter = M.amber
+M.member = M.fg0
 M.border = M.orange
 M.selection = M.bg2
 

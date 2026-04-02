@@ -1,312 +1,232 @@
 # Retro-82 Lua Refactor Plan
 
-This plan is for a future version of `retro-82.nvim`. It describes how to refactor the theme from the current static Vim colorscheme into a modular Lua theme system without losing the visual identity of the current design.
+This plan describes a practical refactor of `retro-82.nvim` from a single Vim colorscheme file into a small Lua-based theme that fits the current project.
+
+The goal is not to clone another theme's framework. The goal is to make Retro 82 easier to maintain without expanding the plugin surface more than necessary.
 
 ## Goal
 
 Refactor `retro-82.nvim` into a Lua theme that is:
 
-- easier to maintain
-- easier to extend
-- more consistent across editor, syntax, Treesitter, LSP, and plugin integrations
-- configurable without becoming bloated
-- still visually faithful to the current retro-82 look
+- easier to read and maintain
+- faithful to the current Retro 82 visuals by default
+- still loaded through `:colorscheme retro-82`
+- split into a few clear modules instead of one large file
+- open to future expansion without requiring it now
+
+## Non-Goals
+
+- Do not match `watchmen.nvim` or any other theme "exactly"
+- Do not redesign Retro 82 semantics during the initial port
+- Do not add a large configuration API before parity exists
+- Do not add compile caching in the first pass
+- Do not create language-specific modules unless we find clear value after the base port
 
 ## Design Principles
 
-- Preserve the unified background model as a first-class design constraint.
-- Treat the palette semantically, not as scattered hex literals.
-- Separate theme data from highlight generation.
-- Make plugin integrations modular and optional.
-- Keep startup simple; compilation/caching should be optional, not required on day one.
-- Preserve a `:colorscheme retro-82` entrypoint.
+- Preserve the current appearance first. Refactor before redesign.
+- Keep the Lua structure small and obvious.
+- Centralize raw hex colors in one palette module.
+- Prefer links where the existing theme already shares meaning.
+- Keep plugin integrations together unless they become large enough to justify another split.
+- Preserve compatibility with current installation and usage patterns.
 
 ## Target Architecture
 
 ```text
 retro-82.nvim/
 ├── colors/
-│   └── retro-82.lua
+│   ├── retro-82.lua            # require("retro82").load()
+│   └── retro-82.vim            # compatibility shim
 ├── lua/
 │   └── retro82/
-│       ├── init.lua
-│       ├── config.lua
-│       ├── palette.lua
-│       ├── util.lua
-│       ├── compiler.lua              # optional in phase 2
-│       ├── groups/
-│       │   ├── editor.lua
-│       │   ├── syntax.lua
-│       │   ├── treesitter.lua
-│       │   ├── semantic_tokens.lua
-│       │   ├── lsp.lua
-│       │   ├── terminal.lua
-│       │   └── integrations/
-│       │       ├── neotree.lua
-│       │       ├── nvimtree.lua
-│       │       ├── telescope.lua
-│       │       ├── cmp.lua
-│       │       ├── blink_cmp.lua
-│       │       ├── noice.lua
-│       │       ├── notify.lua
-│       │       ├── trouble.lua
-│       │       ├── diffview.lua
-│       │       ├── neogit.lua
-│       │       ├── render_markdown.lua
-│       │       ├── snacks.lua
-│       │       ├── mini.lua
-│       │       └── ...
-│       └── extras/
-│           ├── kitty.lua / generated
-│           ├── ghostty.lua / generated
-│           └── ...
+│       ├── init.lua            # load(), optional setup()
+│       ├── palette.lua         # raw colors + semantic aliases
+│       └── groups/
+│           ├── editor.lua      # Normal, CursorLine, StatusLine, Pmenu, etc.
+│           ├── syntax.lua      # classic Vim groups, markdown/html, shared links
+│           ├── treesitter.lua  # modern @ captures currently defined by the theme
+│           ├── lsp.lua         # diagnostics, semantic token groups currently in use
+│           └── integrations.lua# plugin-specific highlights
 ├── extras/
 │   └── existing terminal/app exports
 └── README.md
 ```
 
-## Core Refactor Phases
+This is intentionally smaller than the previous plan. We can split further later if the Lua files become hard to manage.
 
-### 1. Palette Extraction
+## Palette Design
 
-Move all raw colors into `lua/retro82/palette.lua`.
+`lua/retro82/palette.lua` should define the raw palette and a small semantic layer.
 
-Example shape:
+Rules:
 
-```lua
-return {
-  bg = "#00172E",
-  bg_alt = "#0A3A45",
-  bg_highlight = "#134E5A",
-  fg = "#F6DCAC",
-  fg_bright = "#FFF1DA",
-  comment = "#5F8F96",
-  teal = "#3F8F8A",
-  cyan = "#028391",
-  orange = "#E97B3C",
-  amber = "#FAA968",
-  red = "#F85525",
-}
-```
+- No raw hex values outside `palette.lua`
+- Semantic aliases should reflect current Retro 82 behavior, not a speculative redesign
+- If a current highlight is visually important, preserve it even if the semantic naming is imperfect
 
-Then define semantic aliases such as:
-
-- `base`
-- `surface`
-- `surface_highlight`
-- `text`
-- `text_muted`
-- `accent_primary`
-- `accent_secondary`
-- `warning`
-- `error`
-- `success`
-- `link`
-- `directory`
-- `selection`
-
-This is the key step that makes the theme maintainable.
-
-### 2. Config Layer
-
-Create `lua/retro82/config.lua` with conservative options.
-
-Recommended options:
-
-- `transparent = false`
-- `term_colors = true`
-- `styles = { comments = { "italic" }, keywords = { "bold" }, ... }`
-- `integrations = { major integrations }`
-- `color_overrides = {}`
-- `highlight_overrides = {}`
-- `compile = false` initially
-
-Only expose options that are defensible.
-
-### 3. Utility Layer
-
-Create `lua/retro82/util.lua` for:
-
-- highlight merge helpers
-- `set_hl`
-- color transforms if needed: darken/lighten/blend
-- style normalization
-- table merge helpers
-
-This does not need to be complex in phase 1.
-
-### 4. Split Groups by Domain
-
-Move highlights into modules:
-
-- `groups/editor.lua`
-  - `Normal`, `CursorLine`, `Visual`, `StatusLine`, `Pmenu`, `FloatBorder`, etc.
-- `groups/syntax.lua`
-  - classic Vim groups like `Comment`, `String`, `Function`, `Type`, `Keyword`
-- `groups/treesitter.lua`
-  - all `@...` captures
-- `groups/semantic_tokens.lua`
-  - `@lsp.type.*`, `@lsp.typemod.*`
-- `groups/lsp.lua`
-  - diagnostics, references, inlay hints, code lens
-- `groups/terminal.lua`
-  - `terminal_color_*`
-
-This makes the theme reviewable and testable.
-
-### 5. Integrations as Modules
-
-Each plugin gets its own module under `groups/integrations/`.
-
-Benefits:
-
-- keep plugin logic isolated
-- disable a plugin integration cleanly
-- add new ones without polluting core theme files
-
-Priority integrations:
-
-- `neotree`
-- `nvimtree`
-- `telescope`
-- `cmp`
-- `blink_cmp`
-- `noice`
-- `notify`
-- `trouble`
-- `diffview`
-- `neogit`
-- `render_markdown`
-- `mini`
-- `snacks`
-- `treesitter_context`
-- `ufo`
-- `dap`
-- `dap_ui`
-- `neotest`
-- `which_key`
-- `mason`
-
-### 6. Theme Loader
-
-Create `lua/retro82/init.lua` that:
-
-- merges config
-- builds theme tables from modules
-- applies highlights with `vim.api.nvim_set_hl`
-- optionally sets terminal colors
-
-And `colors/retro-82.lua` should call:
+Initial raw palette:
 
 ```lua
-require("retro82").load()
+M.bg0    = "#00172E"
+M.bg1    = "#0A3A45"
+M.bg2    = "#134E5A"
+
+M.fg0    = "#F6DCAC"
+M.fg1    = "#FFF1DA"
+
+M.teal   = "#3F8F8A"
+M.cyan   = "#028391"
+M.orange = "#E97B3C"
+M.amber  = "#FAA968"
+M.red    = "#F85525"
+
+M.muted  = "#5F8F96"
 ```
 
-This becomes the canonical entrypoint.
+Initial semantic aliases should be derived from the current theme. If the current theme uses orange strings or teal numbers, the first Lua port should keep that behavior.
 
-### 7. Backward Compatibility
+## Module Responsibilities
 
-Keep the repo usable during migration:
+### `lua/retro82/init.lua`
 
-- maintain `colors/retro-82.vim` temporarily as a compatibility shim, or remove it only once Lua is stable
-- preserve `colorscheme retro-82`
-- preserve current exported extras
+Responsibilities:
 
-Best path:
+- expose `load()`
+- optionally expose a very small `setup()` later if needed
+- clear highlights and set `background` / `colors_name`
+- merge group tables and apply them with `vim.api.nvim_set_hl`
 
-- phase out `colors/retro-82.vim` after Lua parity is confirmed
+Do not add compile caching in the first pass.
 
-### 8. Testing Strategy
+### `lua/retro82/groups/editor.lua`
 
-Add lightweight checks.
+Contains editor UI groups such as:
 
-Suggested validations:
+- `Normal`
+- `CursorLine`
+- `Visual`
+- `LineNr`
+- `StatusLine`
+- `Pmenu`
+- floating window and border groups
+- diff presentation groups that are part of core editor UX
 
-- `nvim --headless '+colorscheme retro-82' '+hi Normal' '+qall'`
-- check representative groups from each module
-- check theme loads with all integrations enabled
-- check theme loads with integrations disabled
-- check user overrides work
-- check transparent mode if supported
+### `lua/retro82/groups/syntax.lua`
 
-If stronger discipline is wanted:
+Contains:
 
-- add Lua tests for palette/config merge behavior
-- add a script that asserts no duplicate group definitions across modules
+- classic Vim syntax groups
+- markdown and html groups already present in the current file
+- non-Treesitter links and aliases
 
-### 9. Optional Compile Layer
+This file can also hold the basic shared link table if that keeps the structure simpler.
 
-Only after the modular Lua theme is stable.
+### `lua/retro82/groups/treesitter.lua`
 
-A compile layer would:
+Contains the modern `@...` capture groups already defined by the current theme.
 
-- generate cached highlight blobs
-- reduce startup overhead
-- help if the integration list gets very large
+Scope for the first pass:
 
-This should be phase 2, not phase 1.
+- port what exists today
+- add obvious missing aliases only when they improve compatibility without changing the look
+- avoid trying to exhaustively cover every modern capture name on day one
 
-### 10. Extras Generation
+### `lua/retro82/groups/lsp.lua`
 
-Long-term improvement:
+Contains:
 
-- generate `extras/retro-82.kitty`, `ghostty`, `itermcolors`, etc. from the same palette source
-- avoid drift between Neovim palette and terminal exports
+- `Diagnostic*` groups
+- `Lsp*` decoration groups already present or clearly needed
+- semantic token groups already defined in the current theme
 
-This is one of the highest-value long-term improvements if a broader theme ecosystem is desired.
+This file should stay parity-first. We can expand semantic token coverage after the Lua version is stable.
 
-## Refactor Order
+### `lua/retro82/groups/integrations.lua`
 
-1. Extract palette and semantic roles.
-2. Build `editor.lua` and `syntax.lua`.
-3. Move Treesitter and semantic tokens.
-4. Move LSP and diagnostics.
-5. Move major integrations.
-6. Add config and loader.
-7. Swap `colors/retro-82.lua` to Lua entrypoint.
-8. Verify parity with current theme.
-9. Remove or shim the old Vim colorscheme.
-10. Add compile and extras generation only if still worth it.
+Contains plugin-specific groups such as:
 
-## Standards To Enforce During Refactor
+- Telescope
+- FzfLua
+- Gitsigns
+- Lazy
+- WhichKey
+- Mason
+- BlinkCmp
+- nvim-cmp
+- any other plugin groups already defined in the current theme
 
-- No raw hex values outside `palette.lua` unless there is a very strong reason.
-- No plugin highlights in core modules.
-- No background layering that violates the unified retro-82 surface model.
-- Prefer links where semantics are shared.
-- Avoid duplicate highlight definitions across integrations.
-- Every integration module should be readable in isolation.
+Keep this as one file initially. If it becomes unwieldy, then split it by plugin family.
 
-## What "Best It Can Be" Means Here
+## Migration Strategy
 
-The target is not just "many highlight groups." The target is:
+### Phase 1 - Foundation
 
-- coherent palette semantics
-- stable architecture
-- consistent plugin behavior
-- low maintenance cost
-- predictable overrides
-- no visual drift across core, editor, and plugin surfaces
+1. Create `colors/retro-82.lua` as the Lua colorscheme entrypoint.
+2. Create `lua/retro82/init.lua` with a simple `load()` implementation.
+3. Create `lua/retro82/palette.lua`.
+4. Keep `colors/retro-82.vim` as a compatibility shim that loads the Lua version.
 
-That is what the Lua refactor is meant to buy.
+### Phase 2 - Parity Port
 
-## Concrete Deliverable Plan
+5. Port core editor highlights into `groups/editor.lua`.
+6. Port classic syntax groups and non-plugin links into `groups/syntax.lua`.
+7. Port existing Treesitter captures into `groups/treesitter.lua`.
+8. Port existing diagnostics and LSP-related groups into `groups/lsp.lua`.
+9. Port plugin-specific highlights into `groups/integrations.lua`.
 
-### Phase 1
+### Phase 3 - Verification
 
-- scaffold Lua theme structure
-- extract palette/config/util
-- port editor/syntax/treesitter/lsp
-- add Lua colorscheme entrypoint
+10. Verify `:colorscheme retro-82` still works through the normal entrypoint.
+11. Run headless checks against a representative set of groups, not just `Normal`.
+12. Compare the Lua output against the current Vim theme on representative buffers.
+13. Only treat visual changes as acceptable if they are intentional and documented.
 
-### Phase 2
+### Phase 4 - Cleanup
 
-- port existing mined integrations
-- verify parity with current visuals
-- remove dead or duplicated Vim-era definitions
+14. Remove duplicated definitions discovered during the port.
+15. Keep the Vim file as a shim unless there is a strong reason to remove it.
+16. Update `README.md` only after the Lua entrypoint is stable.
 
-### Phase 3
+### Phase 5 - Optional Expansion
 
-- add tests and optional compile cache
-- generate extras from shared palette
-- tighten README and user setup docs
+Optional work after parity:
+
+- add a minimal `setup()` API if there is a concrete use case
+- expand Treesitter and semantic token coverage
+- split `integrations.lua` if it grows too large
+- generate `extras/` files from `palette.lua` if drift becomes a real maintenance issue
+- add compile caching only if startup cost proves meaningful
+
+## Verification Standards
+
+Parity means:
+
+- `:colorscheme retro-82` still works
+- the default appearance stays materially the same
+- existing major plugin integrations still render correctly
+- core syntax, Treesitter, diagnostics, and completion highlights do not regress
+
+Recommended checks:
+
+- `nvim --headless '+colorscheme retro-82' '+hi Normal' '+hi String' '+hi Comment' '+hi DiagnosticError' '+qall'`
+- compare a few representative filetypes by eye
+- spot-check plugin UIs already called out in the README
+
+## Standards
+
+- No raw hex values outside `palette.lua`
+- Prefer parity over abstraction
+- Prefer a small number of clear modules over a framework
+- Avoid introducing configuration until there is a demonstrated need
+- Avoid adding coverage claims we are not prepared to maintain
+
+## What Success Looks Like
+
+Success is a smaller, cleaner codebase with the same Retro 82 identity:
+
+- the theme is Lua-based
+- the palette is centralized
+- highlight logic is split into a few readable modules
+- the repo remains easy to install and use
+- future expansion is possible, but not required to ship the refactor

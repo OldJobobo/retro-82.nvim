@@ -1,3 +1,14 @@
+" Retro 82 Vim compatibility shim.
+"
+" The active colorscheme implementation now lives in Lua. The legacy
+" highlight block remains below as the parity source used by the Lua port.
+
+if has("nvim")
+  lua require("retro82").load()
+  finish
+endif
+
+" RETRO82_LEGACY_DATA_START
 "    ┏━┓┏━╸╺┳╸┏━┓┏━┓   ╻┏━┓┏━┓
 "    ┣┳┛┣╸  ┃ ┣┳┛┃ ┃    ┣━┫┏━┛
 "    ╹┗╸┗━╸ ╹ ╹┗╸┗━┛    ┗━┛┗━╸

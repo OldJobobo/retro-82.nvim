@@ -29,7 +29,12 @@ Current version: `0.2.0`
   "oldjobobo/retro-82.nvim",
   lazy = false,
   priority = 1000,
-  config = function()
+  opts = {
+    transparent = false,
+    terminal_colors = true,
+  },
+  config = function(_, opts)
+    require("retro82").setup(opts)
     vim.cmd("colorscheme retro-82")
   end,
 }
@@ -55,6 +60,25 @@ Set the theme with:
 
 ```vim
 :colorscheme retro-82
+```
+
+Lua setup is optional. If you do use it, keep it minimal:
+
+```lua
+require("retro82").setup({
+  transparent = false,
+  terminal_colors = true,
+})
+vim.cmd("colorscheme retro-82")
+```
+
+## Verification
+
+For a quick local regression check from the repo root:
+
+```bash
+XDG_CACHE_HOME=/tmp/retro82-cache XDG_STATE_HOME=/tmp/retro82-state \
+  nvim --headless -u NONE -c 'luafile scripts/verify.lua'
 ```
 
 ## Versioning

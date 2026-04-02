@@ -36,6 +36,9 @@ eq(type_hl.fg, tonumber("0x8CBFB8"), "Type.fg")
 local diag = get("DiagnosticError")
 eq(diag.fg, tonumber("0xF85525"), "DiagnosticError.fg")
 
+local diag_sign = get("DiagnosticSignError")
+eq(diag_sign.bg, tonumber("0x00172E"), "DiagnosticSignError.bg")
+
 local telescope = get("TelescopeBorder")
 eq(telescope.fg, tonumber("0xE97B3C"), "TelescopeBorder.fg")
 eq(telescope.bg, tonumber("0x00172E"), "TelescopeBorder.bg")

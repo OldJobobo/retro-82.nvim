@@ -12,7 +12,16 @@ It includes highlight groups for modern Neovim workflows, including Treesitter, 
 
 Repo: https://github.com/oldjobobo/retro-82.nvim
 
-Current version: `0.2.0`
+Current version: `0.3.0`
+
+## Highlights
+
+- Lua-native colorscheme entrypoint with a Vim compatibility shim
+- Base16-backed Retro 82 palette with readable semantic aliases
+- Treesitter, LSP, and classic syntax aligned around shared semantic roles
+- Coverage for modern Neovim workflows including Telescope, Blink/Cmp, Neo-tree, Mini, Snacks, Lazy, Neogit, and more
+- Lua-specific semantic token handling so `lua_ls` does not flatten useful Treesitter distinctions
+- Flat dark popup and diagnostic sign backgrounds that stay consistent with the base theme
 
 ## Naming
 
@@ -72,6 +81,34 @@ require("retro82").setup({
 vim.cmd("colorscheme retro-82")
 ```
 
+## Options
+
+Supported setup options:
+
+- `transparent = false`
+- `terminal_colors = true`
+
+When `transparent = true`, the theme removes the background from the main window, floats, sign column, and statuslines.
+
+Example:
+
+```lua
+require("retro82").setup({
+  transparent = true,
+  terminal_colors = true,
+})
+```
+
+## Recent Changes
+
+The current release line includes:
+
+- the Lua refactor from the original monolithic colorscheme file
+- a semantic palette pass that makes fuller use of the Retro 82 Base16 palette
+- Treesitter and LSP role alignment for parameters, members, modules, builtins, and diagnostics
+- Lua-specific LSP fixes so semantic tokens do not override better Treesitter distinctions
+- flatter popup and sign backgrounds for a more consistent dark surface treatment
+
 ## Verification
 
 For a quick local regression check from the repo root:
@@ -92,8 +129,10 @@ XDG_CACHE_HOME=/tmp/retro82-cache XDG_STATE_HOME=/tmp/retro82-state \
 Release tags should use a `v` prefix, for example:
 
 ```text
-v0.2.0
+v0.3.0
 ```
+
+See [CHANGELOG.md](/home/oldjobobo/Projects/nvim-themes/retro-82.nvim/CHANGELOG.md) for release notes.
 
 ## Extras
 

@@ -44,7 +44,7 @@ return {
   ["@lsp.type.type"] = { link = "Type" },
   ["@lsp.type.variable"] = { link = "Identifier" },
   ["@lsp.mod.defaultLibrary"] = { fg = p.orange, bg = "NONE", sp = "NONE" },
-  ["@lsp.type.namespace.lua"] = { link = "Identifier" },
+  ["@lsp.type.namespace.lua"] = { fg = p.module, bg = "NONE", sp = "NONE" },
   ["@lsp.type.parameter.lua"] = { link = "Identifier" },
   ["@lsp.type.property.lua"] = { link = "@variable.member" },
   ["@lsp.type.variable.lua"] = { link = "Identifier" },

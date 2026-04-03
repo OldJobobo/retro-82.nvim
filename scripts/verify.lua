@@ -32,7 +32,7 @@ local string_hl = get("String")
 eq(string_hl.fg, tonumber("0xF6DCAC"), "String.fg")
 
 local function_hl = get("Function")
-eq(function_hl.fg, tonumber("0xFFB38F"), "Function.fg")
+eq(function_hl.fg, tonumber("0xFAA968"), "Function.fg")
 
 local keyword = get("Keyword")
 eq(keyword.fg, tonumber("0xFAA968"), "Keyword.fg")

@@ -22,7 +22,23 @@ local function apply_options(groups)
   local opts = config.get()
 
   if opts.transparent then
-    for _, name in ipairs({ "Normal", "NormalFloat", "SignColumn", "StatusLine", "StatusLineNC" }) do
+    for _, name in ipairs({
+      "Normal",
+      "NormalFloat",
+      "SignColumn",
+      "StatusLine",
+      "StatusLineNC",
+      "MiniStatuslineDevinfo",
+      "MiniStatuslineFileinfo",
+      "MiniStatuslineFilename",
+      "MiniStatuslineInactive",
+      "MiniStatuslineModeCommand",
+      "MiniStatuslineModeInsert",
+      "MiniStatuslineModeNormal",
+      "MiniStatuslineModeOther",
+      "MiniStatuslineModeReplace",
+      "MiniStatuslineModeVisual",
+    }) do
       if groups[name] and not groups[name].link then
         groups[name] = util.merge(groups[name], { bg = "NONE" })
       end

@@ -1,5 +1,7 @@
 # Retro 82 (`retro-82.nvim`)
 
+![Retro 82 preview](./preview.png)
+
 Retro 82 is a high-contrast Neovim colorscheme with a neon-coastline vibe: deep navy backgrounds, sea-glass cyans, and warm sunset accents.
 
 It includes highlight groups for modern Neovim workflows, including Treesitter, LSP diagnostics, Telescope, Gitsigns, Lazy, WhichKey, and more.
